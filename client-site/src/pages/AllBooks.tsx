@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { useGetAllBooksQuery } from "@/redux/features/book/bookApi";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -116,12 +117,12 @@ const AllBooks = () => {
         </div>
 
         {/* Main content */}
-        <div className="flex-grow p-4">
+        <div className="flex-grow p-4 mt-20">
           {/* Search bar */}
           <div className="flex items-center mb-4">
             <input
               onChange={(e) => setSearchText(e.target.value)}
-              className="border border-gray-300 p-2 mr-2 flex-grow"
+              className="border border-2 border-gray-300 p-2 mr-2 flex-grow"
               type="text"
               placeholder="Search..."
             />
