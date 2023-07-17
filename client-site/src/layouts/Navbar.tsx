@@ -27,62 +27,24 @@ const Navbar = () => {
                 </Button>
               </li>
               <li>
-                <Button variant="link" asChild>
-                  {/* <Link to="/checkout">Checkout</Link> */}Checkout
-                </Button>
-              </li>
-              <li>
-                <Button variant="ghost">
-                  <HiOutlineSearch size="25" />
-                </Button>
+                <Link to="/products">Products</Link>
               </li>
               {/* <li>
-                <Cart />
-              </li> */}
-              {/* <li className="ml-5">
-                <DropdownMenu>
-                  <DropdownMenuTrigger className="outline-none">
-                    <Avatar>
-                      <AvatarImage src="https://github.com/shadcn.png" />
-                      <AvatarFallback>CN</AvatarFallback>
-                    </Avatar>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent>
-                    <DropdownMenuLabel>Account</DropdownMenuLabel>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem className="cursor-pointer">
-                      Profile
-                    </DropdownMenuItem>
-                    <DropdownMenuItem className="cursor-pointer">
-                      Billing
-                    </DropdownMenuItem>
-                    {!user?.email && (
-                      <>
-                        <Link to="/login">
-                          <DropdownMenuItem className="cursor-pointer">
-                            Login
-                          </DropdownMenuItem>
-                        </Link>
-                        <Link to="/signup">
-                          <DropdownMenuItem className="cursor-pointer">
-                            Sign Up
-                          </DropdownMenuItem>
-                        </Link>
-                      </>
-                    )}
-                    {user?.email && (
-                      <>
-                        <DropdownMenuItem
-                          onClick={handleLogout}
-                          className="cursor-pointer"
-                        >
-                          Logout
-                        </DropdownMenuItem>
-                      </>
-                    )}
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </li> */}
+                {user?.email && <Link to="/addProduct">Add Product</Link>}
+              </li>
+              {user?.email && (
+                <li>
+                  <Link to="/reading">My ReadingList</Link>
+                </li>
+              )}
+              {user?.email && (
+                <li>
+                  {" "}
+                  <Link to="/wishlist">My WishList</Link>
+                </li>
+              )}
+
+              <li>{!user.email && <Link to="/login">login</Link>}</li> */}
             </ul>
           </div>
         </div>

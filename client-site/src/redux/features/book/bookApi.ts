@@ -1,13 +1,65 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
+import { api } from "@/redux/api/apiSlice";
 
-export const bookApi = createApi({
-  reducerPath: "bookApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/" }), // Replace with your API base URL
+const booksApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    getBooks: builder.query({
-      query: () => "/books",
+    // addBook: builder.mutation({
+    //   query: (data) => ({
+    //     url: `/books/add-new-book`,
+    //     method: "POST",
+    //     body: data,
+    //   }),
+    //   invalidatesTags: ["addNewBook"],
+    // }),
+    // bookReview: builder.mutation({
+    //   query: ({ id, data }) => ({
+    //     url: `/books/${id}`,
+    //     method: "POST",
+    //     body: data,
+    //   }),
+    //   invalidatesTags: ["bookReview"],
+    // }),
+    // updateBook: builder.mutation({
+    //   query: ({ id, data }) => ({
+    //     url: `/books/update-book/${id}`,
+    //     method: "PATCH",
+    //     body: data,
+    //   }),
+    //   invalidatesTags: ["bookDetails"],
+    // }),
+    // deleteBook: builder.mutation({
+    //   query: (id: string) => ({
+    //     url: `/books/${id}`,
+    //     method: "DELETE",
+    //   }),
+    //   invalidatesTags: ["deleteBook"],
+    // }),
+    getAllBooks: builder.query({
+      query: ({ search, genre, publicationYear }) => ({
+        url: "/allBooks",
+        params: { search, genre, publicationYear },
+        providesTags: ["addNewBook", "deleteBook"],
+      }),
     }),
+    getBooks: builder.query({
+      query: () => ({
+        url: "/books",
+        providesTags: ["books"],
+      }),
+    }),
+    // bookDetails: builder.query({
+    //   query: (id: string) => `/books/${id}`,
+    //   providesTags: ["bookDetails", "bookReview"],
+    // }),
   }),
 });
 
-export const { useGetBooksQuery } = bookApi;
+export const {
+  useGetBooksQuery,
+  // useUpdateBookMutation,
+  // useAddBookMutation,
+  // useDeleteBookMutation,
+  useGetAllBooksQuery,
+  // useBookDetailsQuery,
+  // useGetRecentBooksQuery,
+  // useBookReviewMutation,
+} = booksApi;

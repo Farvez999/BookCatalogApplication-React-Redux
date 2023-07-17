@@ -1,26 +1,40 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { IBook } from "@/types/globalTypes";
 
-interface IProps {
-  product: IBook;
+interface IBook {
+  book: {
+    title: string;
+    author: string;
+    genre: string;
+    publicationDate: string;
+    image: string;
+  };
 }
 
 const ProductCard = ({ book }: IBook) => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-  console.log(book.publication_date);
   return (
     <div>
-      <div className="rounded-2xl h-[280px] flex flex-col items-start justify-between p-5 overflow-hidden shadow-md border border-gray-100 hover:shadow-2xl hover:scale-[102%] transition-all gap-2 mt-20 mx-10">
-        {/* <Link to={`/product-details/${book._id}`} className="w-full"> */}
-
-        <h1 className="text-xl font-semibold">{book?.title}</h1>
-        {/* </Link> */}
-        <p>Author: {book?.author}</p>
-        <p className="text-sm">Genre: {book?.genre}</p>
-        <p className="text-sm">Publication Date: {book?.publication_date}</p>
-        {/* <Button variant="default" onClick={() => handleAddProduct(product)}>
-          Add to cart
-        </Button> */}
+      <div className="w-full h-auto w-[350px] pl-5 pr-5 mb-5 lg:pl-2 lg:pr-2 mt-20">
+        <div className="bg-white rounded-lg m-h-64 p-2 transform hover:translate-y-2 hover:shadow-xl transition duration-300">
+          <figure className="mb-2">
+            <img src={book?.image} alt="" className="h-64 ml-auto mr-auto" />
+          </figure>
+          <div className="rounded-lg p-4 bg-white flex flex-col">
+            <div>
+              <h5 className="text-black text-xl font-bold">{book?.title}</h5>
+              <span className="text-sm text-black">Author: {book?.author}</span>
+            </div>
+            <div className="flex items-center">
+              <div className="text-lg text-black font-light">
+                Genre: {book?.genre}
+              </div>
+            </div>
+            <p className="text-[14px] text-black">
+              Published by {book?.publicationDate}
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );
