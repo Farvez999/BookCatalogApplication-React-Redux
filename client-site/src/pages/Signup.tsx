@@ -69,7 +69,7 @@ const Signup = () => {
                   defaultValue={email}
                   type="email"
                   id="email"
-                  className="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:border-red-500"
+                  className="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:border-green-500"
                   placeholder="Enter your email"
                   required
                 />
@@ -86,7 +86,7 @@ const Signup = () => {
                   defaultValue={password}
                   type="password"
                   id="password"
-                  className="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:border-red-500"
+                  className="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:border-green-500"
                   placeholder="Enter your password"
                   required
                 />

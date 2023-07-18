@@ -30,14 +30,11 @@ interface IBook {
 const BookDetails = () => {
   const navigate = useNavigate();
   const { email } = useAppSelector((state) => state.users.user);
-  console.log(email);
 
   const { id } = useParams<{ id: string }>();
 
   const [book, setBook] = useState<IBook | null>(null);
-  console.log(book?.email);
 
-  // Call the useBookDetailsQuery hook
   let bookData: IBook | null = null;
   let isLoader: boolean | false = false;
   if (id) {
@@ -46,9 +43,6 @@ const BookDetails = () => {
     isLoader = isLoading;
   }
 
-  //   console.log(bookData);
-
-  // Update the bookInfo state when the bookData changes
   useEffect(() => {
     if (bookData) {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument

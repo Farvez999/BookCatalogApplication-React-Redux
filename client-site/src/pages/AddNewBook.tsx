@@ -123,7 +123,7 @@ const AddNewBook = () => {
               name="author"
               value={bookInfo.author}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-red-500"
+              className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-green-500"
               required
             />
           </div>
@@ -136,7 +136,7 @@ const AddNewBook = () => {
               name="genre"
               value={bookInfo.genre}
               onChange={handleChange}
-              className="w-full px-4 py-2 border text-black border-gray-300 rounded focus:outline-none focus:border-red-500"
+              className="w-full px-4 py-2 border text-black border-gray-300 rounded focus:outline-none focus:border-green-500"
               required
             >
               <option value="">Select Genre</option>
@@ -160,7 +160,7 @@ const AddNewBook = () => {
               name="publicationDate"
               value={bookInfo.publicationDate}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-red-500"
+              className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-green-500"
               required
             />
           </div>
@@ -178,17 +178,6 @@ const AddNewBook = () => {
               required
             />
           </div>
-          {/* {bookInfo.image && (
-            <div className="mb-4">
-              <img
-                src={bookInfo.image}
-                alt="Book Cover"
-                className="max-w-full mb-2"
-                height="350px"
-                width="260px"
-              />
-            </div>
-          )} */}
           <div className="mb-4">
             <label htmlFor="description" className="text-lg font-semibold mb-3">
               Book description (Optional)
@@ -198,20 +187,20 @@ const AddNewBook = () => {
               name="description"
               value={bookInfo.description}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-red-500"
+              className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-green-500"
             ></textarea>
           </div>
           {isLoad ? (
             <button
               disabled
-              className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+              className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
             >
               Loading...
             </button>
           ) : (
             <button
               type="submit"
-              className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+              className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
             >
               Add Book
             </button>

@@ -1,9 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import React from "react";
-import Books from "./Books";
-import MainLayout from "@/layouts/MainLayout";
 import { useGetBooksQuery } from "@/redux/features/book/bookApi";
 import { Link } from "react-router-dom";
 import BookCard from "./BookCard";
@@ -20,9 +17,7 @@ interface IBook {
 }
 
 const Home = () => {
-  const { data: books, isLoading, error } = useGetBooksQuery(undefined);
-
-  console.log(books?.books);
+  const { data: books } = useGetBooksQuery(undefined);
 
   return (
     <div>

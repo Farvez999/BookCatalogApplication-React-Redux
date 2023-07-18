@@ -12,7 +12,6 @@ interface IBook {
 }
 
 const BookCard = ({ book }: IBook) => {
-  console.log(book);
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   return (
     <div>
