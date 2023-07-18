@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const app = express();
 const port = process.env.PORT || 5000;
@@ -100,38 +101,67 @@ const run = async () => {
       }
     });
 
-    // app.post("/user/login", async (req, res) => {
-    //   const userData = req.body;
-    //   const isAvailableUser = await usersCollection.findOne({
-    //     email: userData.email,
-    //   });
-    //   if (!isAvailableUser) {
-    //     return res.status(400).send({
-    //       message: "This email does not exist!",
-    //     });
-    //   } else {
-    //     const isPasswordMatched = await bcrypt.compare(
-    //       userData.password,
-    //       isAvailableUser.password
-    //     );
-    //     if (!isPasswordMatched) {
-    //       return res.status(400).send({
-    //         message: "Incorrect Password!",
-    //       });
-    //     } else {
-    //       const accessToken = await jwt.sign(
-    //         { email: isAvailableUser.email },
-    //         "tokenSecret",
-    //         { expiresIn: "30d" }
-    //       );
-    //       return res.status(200).send({
-    //         message: "Login successfully!",
-    //         token: accessToken,
-    //       });
-    //     }
-    //   }
-    // });
-    // Authentication APIs End
+    app.post("/user/login", async (req, res) => {
+      const userData = req.body;
+      console.log(userData)
+      const isAvailableUser = await usersCollection.findOne({
+        email: userData.email,
+      });
+      if (!isAvailableUser) {
+        return res.status(400).send({
+          message: "This email does not exist!",
+        });
+      } else {
+        const isPasswordMatched = await bcrypt.compare(
+          userData.password,
+          isAvailableUser.password
+        );
+        if (!isPasswordMatched) {
+          return res.status(400).send({
+            message: "Incorrect Password!",
+          });
+        } else {
+          const accessToken = await jwt.sign(
+            { email: isAvailableUser.email },
+            "tokenSecret",
+            { expiresIn: "30d" }
+          );
+          return res.status(200).send({
+            message: "Login successfully!",
+            token: accessToken,
+          });
+        }
+      }
+    });
+
+    app.post("/books/addNewBook", async (req, res) => {
+      const authorizeToken = req.headers.authorization;
+      if (!authorizeToken) {
+        return res.status(400).send({
+          message: "Authorization not provided",
+        });
+      } else {
+        const verifiedUser = await jwt.verify(authorizeToken, "tokenSecret");
+        if (!verifiedUser) {
+          return res.status(400).send({
+            message: "You are not authorized",
+          });
+        } else {
+          const bookData = req.body;
+          const result = await booksCollection.insertOne(bookData);
+          if (result.acknowledged == true) {
+            return res.status(200).send({
+              message: "Book added successfully!",
+              book: bookData,
+            });
+          } else {
+            return res.status(400).send({
+              message: "Book added failed!",
+            });
+          }
+        }
+      }
+    });
 
 
   } finally {
