@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 export const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5000/",
+    baseUrl: "https://book-catalog-redux-app.vercel.app/",
     prepareHeaders: (headers) => {
       const token = Cookies.get("token");
       console.log(token);
