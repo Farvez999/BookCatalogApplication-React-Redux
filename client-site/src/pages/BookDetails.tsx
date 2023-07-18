@@ -72,7 +72,7 @@ const BookDetails = () => {
           const response: any = await deleteBook(id);
           if (response?.data) {
             swal(response?.data?.message, "", "success");
-            navigate("/all-books");
+            navigate("/allBooks");
             setDeleteLoad(false);
           } else {
             swal("Book delete operation failed!", "", "error");
