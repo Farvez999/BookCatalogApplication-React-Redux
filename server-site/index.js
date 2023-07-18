@@ -178,6 +178,40 @@ const run = async () => {
       }
     });
 
+    app.post("/books/:id", async (req, res) => {
+      const authorizeToken = req.headers.authorization;
+      if (!authorizeToken) {
+        return res.status(400).send({
+          message: "Authorization not provided",
+        });
+      } else {
+        const verifiedUser = await jwt.verify(authorizeToken, "tokenSecret");
+        if (!verifiedUser) {
+          return res.status(400).send({
+            message: "You are not authorized",
+          });
+        } else {
+          const bookId = req.params.id;
+          const bodyData = req.body;
+          const filter = { _id: new ObjectId(bookId) };
+          const update = {
+            $push: { customerReviews: bodyData },
+          };
+
+          const result = await booksCollection.updateOne(filter, update);
+
+          if (result.modifiedCount > 0) {
+            return res.status(200).send({
+              message: "Review added successfully!",
+            });
+          } else {
+            return res.status(400).send({
+              message: "Review adding failed!",
+            });
+          }
+        }
+      }
+    });
 
   } finally {
   }
