@@ -70,7 +70,6 @@ const run = async () => {
       });
     });
 
-
     app.post("/user/signup", async (req, res) => {
       const userData = req.body;
 
@@ -193,9 +192,10 @@ const run = async () => {
         } else {
           const bookId = req.params.id;
           const bodyData = req.body;
+          console.log(bodyData)
           const filter = { _id: new ObjectId(bookId) };
           const update = {
-            $push: { customerReviews: bodyData },
+            $push: { reviews: bodyData },
           };
 
           const result = await booksCollection.updateOne(filter, update);
@@ -207,6 +207,75 @@ const run = async () => {
           } else {
             return res.status(400).send({
               message: "Review adding failed!",
+            });
+          }
+        }
+      }
+    });
+
+    app.patch("/books/update-book/:id", async (req, res) => {
+      const authorizeToken = req.headers.authorization;
+      if (!authorizeToken) {
+        return res.status(400).send({
+          message: "Authorization not provided",
+        });
+      } else {
+        const verifiedUser = await jwt.verify(authorizeToken, "tokenSecret");
+        if (!verifiedUser) {
+          return res.status(400).send({
+            message: "You are not authorized",
+          });
+        } else {
+          const bookId = req.params.id;
+          const updatedBookData = req.body;
+
+          delete updatedBookData._id;
+
+          const result = await booksCollection.updateOne(
+            { _id: new ObjectId(bookId) },
+            { $set: updatedBookData }
+          );
+
+          if (result.matchedCount > 0) {
+            return res.status(200).send({
+              message: "Book updated successfully!",
+              book: updatedBookData,
+            });
+          } else {
+            return res.status(404).send({
+              message: "Book not found",
+            });
+          }
+        }
+      }
+    });
+
+    app.delete("/books/:id", async (req, res) => {
+      const authorizeToken = req.headers.authorization;
+      if (!authorizeToken) {
+        return res.status(400).send({
+          message: "Authorization not provided",
+        });
+      } else {
+        const verifiedUser = await jwt.verify(authorizeToken, "tokenSecret");
+        if (!verifiedUser) {
+          return res.status(400).send({
+            message: "You are not authorized",
+          });
+        } else {
+          const bookId = req.params.id;
+
+          const result = await booksCollection.deleteOne({
+            _id: new ObjectId(bookId),
+          });
+
+          if (result.deletedCount > 0) {
+            return res.status(200).send({
+              message: "Book deleted successfully!",
+            });
+          } else {
+            return res.status(404).send({
+              message: "Book not found",
             });
           }
         }
