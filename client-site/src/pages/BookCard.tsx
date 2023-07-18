@@ -11,7 +11,7 @@ interface IBook {
   };
 }
 
-const ProductCard = ({ book }: IBook) => {
+const BookCard = ({ book }: IBook) => {
   console.log(book);
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   return (
@@ -41,4 +41,4 @@ const ProductCard = ({ book }: IBook) => {
   );
 };
 
-export default ProductCard;
+export default BookCard;

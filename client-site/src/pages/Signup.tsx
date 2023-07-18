@@ -48,7 +48,7 @@ const Signup = () => {
         className="min-h-screen flex items-center justify-center bg-cover bg-center"
         style={{
           backgroundImage:
-            "url(https://images.unsplash.com/photo-1547555999-14e818e09e33?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1032&q=80)",
+            "url(https://celadonbooks.com/wp-content/uploads/2021/02/what-is-nonfiction.gif)",
         }}
       >
         <div className="bg-white w-[500px] shadow-md rounded-lg p-8 flex">

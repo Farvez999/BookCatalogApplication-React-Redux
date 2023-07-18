@@ -2,7 +2,7 @@
 import { useGetAllBooksQuery } from "@/redux/features/book/bookApi";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import ProductCard from "./ProductCard";
+import BookCard from "./BookCard";
 
 interface IBook {
   _id: string;
@@ -140,7 +140,7 @@ const AllBooks = () => {
                   return (
                     <Link key={i} to={`/details/${book?._id}`}>
                       {/* <Card book={book} /> */}
-                      <ProductCard book={book}></ProductCard>
+                      <BookCard book={book}></BookCard>
                     </Link>
                   );
                 })}

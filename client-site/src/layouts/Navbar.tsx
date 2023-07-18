@@ -36,7 +36,7 @@ const Navbar = () => {
             <img
               className="h-16"
               src="https://i.pinimg.com/originals/a2/c3/34/a2c3349d65d1418ccd25fa77cba3eda9.png"
-              alt="log"
+              alt="logo"
             />
           </div>
           <div>

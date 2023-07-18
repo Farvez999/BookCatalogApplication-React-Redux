@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { Link } from "react-router-dom";
-import ProductCard from "./ProductCard";
+import BookCard from "./BookCard";
 import { useGetBooksQuery } from "@/redux/features/book/bookApi";
 
 interface IBook {
@@ -29,7 +29,7 @@ const Books = () => {
           {books?.books?.map((book: IBook, i: number) => {
             return (
               <Link key={i} to={`/details/${book._id}`}>
-                <ProductCard book={book} />
+                <BookCard book={book} />
               </Link>
             );
           })}
