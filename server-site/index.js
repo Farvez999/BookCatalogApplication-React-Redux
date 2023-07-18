@@ -289,7 +289,7 @@ const run = async () => {
 run().catch((err) => console.log(err));
 
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+  res.send('Server is Running!');
 });
 
 app.listen(port, () => {
