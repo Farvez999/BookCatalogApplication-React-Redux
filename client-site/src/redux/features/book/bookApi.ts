@@ -1,8 +1,22 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { api } from "@/redux/api/apiSlice";
 
 const booksApi = api.injectEndpoints({
   endpoints: (builder) => ({
+    getBooks: builder.query({
+      query: () => ({
+        url: "/books",
+        providesTags: ["books"],
+      }),
+    }),
+    getAllBooks: builder.query({
+      query: ({ search, genre, publicationYear }) => ({
+        url: "/allBooks",
+        params: { search, genre, publicationYear },
+        providesTags: ["addNewBook", "deleteBook"],
+      }),
+    }),
     addBook: builder.mutation({
       query: (data) => ({
         url: `books/addNewBook`,
@@ -10,6 +24,10 @@ const booksApi = api.injectEndpoints({
         body: data,
       }),
       invalidatesTags: ["addNewBook"],
+    }),
+    bookDetails: builder.query({
+      query: (id: string) => `/books/${id}`,
+      providesTags: ["bookDetails", "bookReview"],
     }),
     bookReview: builder.mutation({
       query: ({ id, data }) => ({
@@ -34,23 +52,6 @@ const booksApi = api.injectEndpoints({
       }),
       invalidatesTags: ["deleteBook"],
     }),
-    getAllBooks: builder.query({
-      query: ({ search, genre, publicationYear }) => ({
-        url: "/allBooks",
-        params: { search, genre, publicationYear },
-        providesTags: ["addNewBook", "deleteBook"],
-      }),
-    }),
-    getBooks: builder.query({
-      query: () => ({
-        url: "/books",
-        providesTags: ["books"],
-      }),
-    }),
-    // bookDetails: builder.query({
-    //   query: (id: string) => `/books/${id}`,
-    //   providesTags: ["bookDetails", "bookReview"],
-    // }),
   }),
 });
 
@@ -60,6 +61,6 @@ export const {
   useAddBookMutation,
   useDeleteBookMutation,
   useGetAllBooksQuery,
-  // useBookDetailsQuery,
+  useBookDetailsQuery,
   useBookReviewMutation,
 } = booksApi;
