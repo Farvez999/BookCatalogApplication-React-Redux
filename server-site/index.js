@@ -103,7 +103,6 @@ const run = async () => {
 
     app.post("/user/login", async (req, res) => {
       const userData = req.body;
-      console.log(userData)
       const isAvailableUser = await usersCollection.findOne({
         email: userData.email,
       });
@@ -160,6 +159,22 @@ const run = async () => {
             });
           }
         }
+      }
+    });
+
+    app.get("/books/:id", async (req, res) => {
+      const bookId = req.params.id;
+      const book = await booksCollection.findOne({ _id: new ObjectId(bookId) });
+
+      if (book) {
+        return res.status(200).send({
+          message: "Book details retrieved successfully!",
+          book: book,
+        });
+      } else {
+        return res.status(404).send({
+          message: "Book not found",
+        });
       }
     });
 
