@@ -44,7 +44,7 @@ const BookDetails = () => {
     isLoader = isLoading;
   }
 
-  console.log(bookData);
+//   console.log(bookData);
 
   // Update the bookInfo state when the bookData changes
   useEffect(() => {
@@ -160,7 +160,7 @@ const BookDetails = () => {
             </p>
             {book?.description && (
               <h3 className="text-xl font-[500] mt-4 mb-2">
-                description about {book.title}
+                Description about {book.title}
               </h3>
             )}
             <p className="text-lg mb-4">{book?.description}</p>
@@ -174,23 +174,23 @@ const BookDetails = () => {
                   id="review"
                   value={reviewComment}
                   onChange={(e) => setReviewComment(e.target.value)}
-                  className="w-full h-32 p-2 mb-2 border border-gray-300 rounded focus:outline-none focus:border-red-500"
-                  placeholder="Write your review here..."
+                  className="w-full h-32 p-2 mb-2 border border-gray-300 rounded focus:outline-none focus:border-green-500"
+                  placeholder="Type your review here..."
                   required
                 ></textarea>
                 {isLoading ? (
                   <button
                     disabled
-                    className="px-4 py-2 bg-red-500 text-black rounded hover:bg-red-600"
+                    className="px-4 py-2 bg-green-500 text-black rounded hover:bg-green-600"
                   >
                     Loading...
                   </button>
                 ) : (
                   <button
                     type="submit"
-                    className="px-4 py-2 bg-red-500 text-black rounded hover:bg-red-600"
+                    className="px-4 py-2 bg-green-500 text-black rounded hover:bg-green-600"
                   >
-                    Submit Review
+                    Submit Your Review
                   </button>
                 )}
               </form>
