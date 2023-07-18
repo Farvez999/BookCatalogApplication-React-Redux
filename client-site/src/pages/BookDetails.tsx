@@ -30,10 +30,12 @@ interface IBook {
 const BookDetails = () => {
   const navigate = useNavigate();
   const { email } = useAppSelector((state) => state.users.user);
+  console.log(email);
 
   const { id } = useParams<{ id: string }>();
 
   const [book, setBook] = useState<IBook | null>(null);
+  console.log(book?.email);
 
   // Call the useBookDetailsQuery hook
   let bookData: IBook | null = null;
@@ -44,7 +46,7 @@ const BookDetails = () => {
     isLoader = isLoading;
   }
 
-//   console.log(bookData);
+  //   console.log(bookData);
 
   // Update the bookInfo state when the bookData changes
   useEffect(() => {
@@ -122,8 +124,9 @@ const BookDetails = () => {
               {/* Buttons */}
               <div className="flex items-center">
                 <Link to={`/edit-book/${book._id}`}>
+                 
                   {email == book?.email && (
-                    <button className="flex items-center px-4 py-[3px] bg-red-500 text-black rounded hover:bg-red-600 mr-3">
+                    <button className="flex items-center px-4 py-[3px] bg-green-500 text-black rounded hover:bg-green-600 mr-3">
                       <FiEdit2 className="text-[18px] mr-2" /> <span>Edit</span>
                     </button>
                   )}
@@ -136,16 +139,19 @@ const BookDetails = () => {
                     >
                       Loading...
                     </button>
-                  ) : (
-                    <button
-                      // eslint-disable-next-line @typescript-eslint/no-misused-promises
-                      onClick={handleDeleteBook}
-                      className="flex items-center px-4 py-[3px] bg-red-500 text-black rounded hover:bg-red-600 ml-3"
-                    >
-                      <AiFillDelete className="text-[18px] mr-2" />{" "}
-                      <span>Delete</span>
-                    </button>
-                  ))}
+                  ) 
+                //   : (
+                //     <button
+                //       // eslint-disable-next-line @typescript-eslint/no-misused-promises
+                //       onClick={handleDeleteBook}
+                //       className="flex items-center px-4 py-[3px] bg-red-500 text-black rounded hover:bg-red-600 ml-3"
+                //     >
+                //       <AiFillDelete className="text-[18px] mr-2" />{" "}
+                //       <span>Delete</span>
+                //     </button>
+                //   )
+                //   )
+                }
               </div>
             </div>
             <p className="text-lg mb-2">
