@@ -53,6 +53,38 @@ const AllBooks = () => {
   return (
     <div>
       <div className="flex">
+        {/* Main content */}
+        <div className="flex-grow p-4">
+          {/* Search bar */}
+          <div className="flex items-center mb-4">
+            <input
+              onChange={(e) => setSearchText(e.target.value)}
+              className="border border-2 border-gray-300 p-2 mr-2 flex-grow"
+              type="text"
+              placeholder="Search..."
+            />
+          </div>
+
+          {/* All Books */}
+          <div className="mt-[20px] mb-[100px] mr-8">
+            {isLoading ? (
+              <div>
+                <h3 className="text-3xl font-[500] text-center">Loading...</h3>
+              </div>
+            ) : (
+              <div className="grid grid-cols-3 gap-x-10 gap-y-10">
+                {books?.books?.map((book: IBook, i: number) => {
+                  return (
+                    <Link key={i} to={`/details/${book?._id}`}>
+                      {/* <Card book={book} /> */}
+                      <BookCard book={book}></BookCard>
+                    </Link>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        </div>
         {/* Sidebar */}
         <div className="w-1/4 bg-green-200 p-4">
           <div className="flex items-center justify-between mb-4">
@@ -115,39 +147,6 @@ const AllBooks = () => {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-
-        {/* Main content */}
-        <div className="flex-grow p-4">
-          {/* Search bar */}
-          <div className="flex items-center mb-4">
-            <input
-              onChange={(e) => setSearchText(e.target.value)}
-              className="border border-2 border-gray-300 p-2 mr-2 flex-grow"
-              type="text"
-              placeholder="Search..."
-            />
-          </div>
-
-          {/* All Books */}
-          <div className="mt-[20px] mb-[100px]">
-            {isLoading ? (
-              <div>
-                <h3 className="text-3xl font-[500] text-center">Loading...</h3>
-              </div>
-            ) : (
-              <div className="grid grid-cols-3 gap-x-10 gap-y-10">
-                {books?.books?.map((book: IBook, i: number) => {
-                  return (
-                    <Link key={i} to={`/details/${book?._id}`}>
-                      {/* <Card book={book} /> */}
-                      <BookCard book={book}></BookCard>
-                    </Link>
-                  );
-                })}
-              </div>
-            )}
           </div>
         </div>
       </div>

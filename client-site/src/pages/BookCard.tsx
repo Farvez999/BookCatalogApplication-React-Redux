@@ -15,7 +15,7 @@ const BookCard = ({ book }: IBook) => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   return (
     <div>
-      <div className="w-full h-auto w-[350px] pl-5 pr-5 mb-5 lg:pl-2 lg:pr-2">
+      <div className="w-full h-auto w-[300px] pl-5 pr-5 mb-5 lg:pl-2 lg:pr-2">
         <div className="bg-white rounded-lg m-h-64 p-2 transform hover:translate-y-2 hover:shadow-xl transition duration-300">
           <figure className="mb-2">
             <img src={book.image} alt="" className="h-64 ml-auto mr-auto" />
