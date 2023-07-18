@@ -6,7 +6,10 @@ const MainLayout = () => {
   return (
     <div>
       <Navbar></Navbar>
-      <Outlet></Outlet>
+      <div className="py-16">
+        <Outlet />
+      </div>
+      {/* <Footer/> */}
     </div>
   );
 };

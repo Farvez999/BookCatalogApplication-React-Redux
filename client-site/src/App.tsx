@@ -7,6 +7,7 @@ import Cookies from "js-cookie";
 import MainLayout from "./layouts/MainLayout";
 import { useEffect } from "react";
 import { setUser } from "./redux/features/users/usersSlice";
+import Navbar from "./layouts/Navbar";
 
 interface DecodedToken extends JwtPayload {
   email: string;

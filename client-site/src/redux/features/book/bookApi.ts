@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { api } from "@/redux/api/apiSlice";
 
 const booksApi = api.injectEndpoints({
   endpoints: (builder) => ({
     addBook: builder.mutation({
       query: (data) => ({
-        url: `/books/add-new-book`,
+        url: `books/addNewBook`,
         method: "POST",
         body: data,
       }),

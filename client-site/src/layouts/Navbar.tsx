@@ -70,12 +70,32 @@ const Navbar = () => {
                   <Link to="/wishlist">My WishList</Link>
                 </li>
               )}
+*/}
 
-                
-
-              <li>{!user.email && <Link to="/login">login</Link>}</li> */}
-
-              <li>{<Link to="/signup">Signup</Link>}</li>
+              {email ? (
+                <li onClick={handleLogout}>
+                  <a className="cursor-pointer block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    Sign Out
+                  </a>
+                </li>
+              ) : (
+                <>
+                  <li>
+                    <Link to="/signup">
+                      <a className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        Sign Up
+                      </a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/login">
+                      <a className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        Log In
+                      </a>
+                    </Link>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
         </div>

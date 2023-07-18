@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
@@ -44,25 +45,25 @@ const AddNewBook = () => {
     setBookInfo({ ...bookInfo, [e.target.name]: e.target.value });
   };
 
-  //   const handleImageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
-  //     const file = e.target.files?.[0];
-  //     if (file) {
-  //       const formData = new FormData();
-  //       formData.append("image", file);
-  //       formData.append("key", "bb406e6aefacc44e37d7220991feb6f5"); // Replace with your ImageBB API key
+  const handleImageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const formData = new FormData();
+      formData.append("image", file);
+      formData.append("key", "60eafa116db4500b945b8df0c36499b4");
 
-  //       try {
-  //         const response = await axios.post(
-  //           "https://api.imgbb.com/1/upload",
-  //           formData
-  //         );
-  //         const imageUrl = response.data.data.url;
-  //         setBookInfo({ ...bookInfo, image: imageUrl });
-  //       } catch (error) {
-  //         console.log(error);
-  //       }
-  //     }
-  //   };
+      try {
+        const response = await axios.post(
+          "https://api.imgbb.com/1/upload",
+          formData
+        );
+        const imageUrl = response.data.data.url;
+        setBookInfo({ ...bookInfo, image: imageUrl });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -85,7 +86,7 @@ const AddNewBook = () => {
         image: "",
         description: "",
       });
-      navigate("/all-books");
+      navigate("/allBooks");
       setIsLoad(false);
     } else {
       swal("Book Added Failed", "", "error");
@@ -95,11 +96,11 @@ const AddNewBook = () => {
 
   return (
     <div>
-      <div className="max-w-md mx-auto my-[50px]">
-        <h2 className="text-2xl font-bold mb-4">Add a New Book</h2>
+      <div className="max-w-md mx-auto">
+        <h2 className="text-2xl font-bold mb-4">Add New Book</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label htmlFor="title" className="text-lg font-semibold mb-3">
+            <label htmlFor="title" className="text-lg font-semibold mb-3 mt-40">
               Title
             </label>
             <input
@@ -139,11 +140,11 @@ const AddNewBook = () => {
               required
             >
               <option value="">Select Genre</option>
-              <option value="Scary Story">Scary Story</option>
+              <option value="Scary Story">Classic</option>
               <option value="Mystery">Mystery</option>
-              <option value="Horror">Horror</option>
-              <option value="Fantasy Horror">Fantasy Horror</option>
-              <option value="Supernatural">Supernatural</option>
+              <option value="Horror">Fiction</option>
+              <option value="Fantasy Horror">Fantasy</option>
+              <option value="Supernatural">Young Adult Fantasy</option>
             </select>
           </div>
           <div className="mb-4">
@@ -163,7 +164,7 @@ const AddNewBook = () => {
               required
             />
           </div>
-          {/* <div className="mb-4">
+          <div className="mb-4">
             <label htmlFor="image" className="text-lg font-semibold mb-3">
               Book Image
             </label>
@@ -176,8 +177,8 @@ const AddNewBook = () => {
               className="w-full"
               required
             />
-          </div> */}
-          {bookInfo.image && (
+          </div>
+          {/* {bookInfo.image && (
             <div className="mb-4">
               <img
                 src={bookInfo.image}
@@ -187,7 +188,7 @@ const AddNewBook = () => {
                 width="260px"
               />
             </div>
-          )}
+          )} */}
           <div className="mb-4">
             <label htmlFor="description" className="text-lg font-semibold mb-3">
               Book description (Optional)

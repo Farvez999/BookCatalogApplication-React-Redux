@@ -21,9 +21,9 @@ const Books = () => {
 
   return (
     <div>
-      <div className="mb-[100px]">
+      <div className="mb-[100px] mx-16 my-4">
         <h3 className="text-[20px] font-[500] text-left mb-[20px]">
-          Recently Add New Books
+          Recently New Books
         </h3>
         <div className="grid grid-cols-3 gap-x-10 gap-y-10">
           {books?.books?.map((book: IBook, i: number) => {

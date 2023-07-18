@@ -53,7 +53,7 @@ const AllBooks = () => {
       <div className="flex">
         {/* Sidebar */}
         <div className="w-1/4 bg-green-200 p-4">
-          <div className="flex items-center justify-between mb-4 mt-20">
+          <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-semibold">Filters</h2>
             <button
               onClick={() => {
@@ -117,7 +117,7 @@ const AllBooks = () => {
         </div>
 
         {/* Main content */}
-        <div className="flex-grow p-4 mt-20">
+        <div className="flex-grow p-4">
           {/* Search bar */}
           <div className="flex items-center mb-4">
             <input
