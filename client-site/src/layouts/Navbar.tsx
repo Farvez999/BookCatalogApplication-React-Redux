@@ -1,8 +1,33 @@
 import { Button } from "@/components/ui/button";
+import { useAppSelector } from "@/redux/hooks";
+import { useState } from "react";
 import { HiOutlineSearch } from "react-icons/hi";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import Cookies from "js-cookie";
+import { setUser } from "@/redux/features/users/usersSlice";
 
 const Navbar = () => {
+  const { email } = useAppSelector((state) => state.users.user);
+  const dispatch = useDispatch();
+
+  const [isShowMenus, setIsShowMenus] = useState(false);
+  const [isShowProfile, setIsShowProfile] = useState(false);
+
+  const handleToggle = () => {
+    // Toggle mobile menu visibility
+    setIsShowMenus(!isShowMenus);
+  };
+
+  const handleToggleProfile = () => {
+    setIsShowProfile(!isShowProfile);
+  };
+
+  const handleLogout = () => {
+    dispatch(setUser(null));
+    Cookies.remove("token");
+  };
+
   return (
     <nav className="w-full h-16 fixed top backdrop-blur-lg z-10">
       <div className="h-full w-full bg-white/60">
@@ -27,10 +52,14 @@ const Navbar = () => {
                 </Button>
               </li>
 
-              {/* <li>
-                {user?.email && <Link to="/addProduct">Add Product</Link>}
+              <li>
+                {email && (
+                  <Button variant="link" asChild>
+                    <Link to="/addNewBook">Add New Book</Link>
+                  </Button>
+                )}
               </li>
-              {user?.email && (
+              {/*{user?.email && (
                 <li>
                   <Link to="/reading">My ReadingList</Link>
                 </li>
@@ -42,7 +71,10 @@ const Navbar = () => {
                 </li>
               )}
 
+                
+
               <li>{!user.email && <Link to="/login">login</Link>}</li> */}
+
               <li>{<Link to="/signup">Signup</Link>}</li>
             </ul>
           </div>

@@ -5,12 +5,13 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import swal from "sweetalert";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { setLoading } from "../redux/features/users/usersSlice";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { useSignUpMutation } from "@/redux/features/users/usersApi";
+import swal from "sweetalert";
+import Cookies from "js-cookie";
+import { useSignInMutation } from "@/redux/features/users/usersApi";
 
-const Signup = () => {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -19,25 +20,30 @@ const Signup = () => {
 
   const navigate = useNavigate();
 
-  const [signUpMutation] = useSignUpMutation();
+  const [signInMutation] = useSignInMutation();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       const credential = { email, password };
+      console.log(email);
       dispatch(setLoading(true));
-      const response: any = await signUpMutation(credential);
+      const response: any = await signInMutation(credential);
+      console.log(response);
       if (response.data) {
-        swal(response?.data?.message, "", "success");
-        navigate("/login");
+        // swal(response?.data?.message, "", "success");
+        // console.log(response?.data?.message);
+        Cookies.set("token", response?.data?.token);
+        navigate("/");
         setEmail("");
         setPassword("");
       } else {
         swal(response?.error?.data?.message, "", "error");
+        // console.log(response?.error?.data?.message);
       }
       dispatch(setLoading(false));
     } catch (error: any) {
-      console.error("Sign-up failed:", error);
+      console.error("Sign-in failed:", error);
       dispatch(setLoading(false));
     }
   };
@@ -48,13 +54,13 @@ const Signup = () => {
         className="min-h-screen flex items-center justify-center bg-cover bg-center"
         style={{
           backgroundImage:
-            "url(https://images.unsplash.com/photo-1547555999-14e818e09e33?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1032&q=80)",
+            "url(https://images.unsplash.com/photo-1551029506-0807df4e2031?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1034&q=80)",
         }}
       >
         <div className="bg-white w-[500px] shadow-md rounded-lg p-8 flex">
           <div className="w-full">
             <h2 className="text-3xl font-bold mb-6 text-gray-800 text-center">
-              Create An Account
+              Log In
             </h2>
             <form onSubmit={handleSubmit}>
               <div className="mb-6">
@@ -69,9 +75,8 @@ const Signup = () => {
                   defaultValue={email}
                   type="email"
                   id="email"
-                  className="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:border-red-500"
+                  className="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:border-green-500"
                   placeholder="Enter your email"
-                  required
                 />
               </div>
               <div className="mb-6">
@@ -86,9 +91,8 @@ const Signup = () => {
                   defaultValue={password}
                   type="password"
                   id="password"
-                  className="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:border-red-500"
+                  className="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:border-green-500"
                   placeholder="Enter your password"
-                  required
                 />
               </div>
               {isLoading ? (
@@ -103,14 +107,14 @@ const Signup = () => {
                   type="submit"
                   className="w-full bg-green-500 text-black py-2 px-4 rounded-md hover:bg-green-600 transition-colors"
                 >
-                  Sign Up
+                  Login
                 </button>
               )}
               <p className="text-gray-700 text-md mt-4">
-                Already have an account?{" "}
-                <Link to="/login">
+                have not account?{" "}
+                <Link to="/signup">
                   <a className="text-green-500 font-semibold hover:text-green-700">
-                    Sign In
+                    Sign Up
                   </a>
                 </Link>
               </p>
@@ -122,4 +126,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Login;
